@@ -1,28 +1,28 @@
-﻿UI Bootstrap Modal使用範例
+﻿TableHelper with Controller使用範例
 ===
-練習UI Bootstrap的Modal使用.
+練習在Directive中使用Controller來取代使用link function 直接去控制DOM.
 
-### 安裝
+### 範例重點
+1. 在DDO中定義controller及使用controllerAs 
 ```
-npm install
-bower install
-bower install angular-bootstrap --save-dev
+controller: controller,
+controllerAs: 'vm',
+bindToController: true,
 ```
+2. 使用`watchCollection`監控資料來源變化
+```
+$scope.$watchCollection('datasource', getColumns);
+```
+3. 在isolate scope中,controller與DDO中的scope是相同的物件,所以其中的變數可共用
 
-### 掛載
 ```
-<script src="path/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-angular.module('myModule', ['ui.bootstrap']);
-```
+//DDO
+scope: {
+    columnmap: '@',
+    datasource: '='  
+}
 
-### 範例
-以`modal`功能來對Employee作promote, 完成promote後將該筆資料自陣列中刪除.
-1. 建立一個Employee的value, 可以用來實體化
-2. 建立controller, 用來作刪除,promote
-3. 建立factory用來包裝`modal`, 並自建controller及template用來顯示`modal`內容 
-
-若是都順利的下載套件到本地端, 就可以啟動本地的伺服器了.
+function controller() {
+    vm.columnmap = $scope.$eval(vm.columnmap);
+}
 ```
-gulp serve-dev
-```
-
