@@ -1,0 +1,9 @@
+<div class="jumbotron">
+
+<h1>{{vm.title}}</h1>
+
+</div>
+
+<table-helper-controller datasource="vm.customers" 
+                        columnmap="[{name: 'Name'}, {street: 'Street'}, {age: 'Age'}, {url: 'URL', hidden: true}]">
+</table-helper-controller>
